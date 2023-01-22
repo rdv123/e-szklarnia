@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 
-const axios = require("axios"); //подключение аксиос
+const axios = require("axios"); 
 
 const CronJob = require('cron').CronJob;
 
@@ -8,7 +8,7 @@ const CronJob = require('cron').CronJob;
 // job.start()
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '5806696329:AAGtGUpqSyqI3C70vnVAQwlUkkXdknbXSmE';
+const token = 'xxxxxxxxxxxx';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
