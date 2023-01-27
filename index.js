@@ -15,7 +15,7 @@ const bot = new TelegramBot(token, {polling: true});
 
 const job = new CronJob(
 	
-  "03 23 * * *",
+  "00 07 * * *",
 	async function() {
 		console.log('You will see this message every second 15');
     let price = await getPrice()
