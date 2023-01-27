@@ -8,35 +8,41 @@ const CronJob = require('cron').CronJob;
 // job.start()
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = 'xxxxxxxxxxxx';
+const token = 'dddddddddddd';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
 
 const job = new CronJob(
 	
-  "*/6000 * * * * *",
+  "03 23 * * *",
 	async function() {
 		console.log('You will see this message every second 15');
     let price = await getPrice()
 
     console.log(price)
   
-   const chatId = 349046375;
+   
+    const chatId = -1001708123510;
 
-   bot.sendMessage(chatId, `Всем доброго дня! Сегодня цена на PowerMax ${price}. Широкой дороги и удачного дня!`)
+    try {
+      await bot.sendMessage(chatId, `Всем доброго дня! Сегодня цена на PowerMax ${price}. Широкой дороги и удачного дня!`)
+    } catch (error) {
+      console.error(error);
+      // Expected output: ReferenceError: nonExistentFunction is not defined
+      // (Note: the exact output may be browser-dependent)
+    }
 
-
-
+   
 
 
 	},
 	null,
 	true,
-	'America/Los_Angeles'
+	'Europe/Warsaw'
 
 );
-// job.start()
+
 
 const getPrice = async()=>{
     const response = await axios.get('https://tool.orlen.pl/api/wholesalefuelprices')
@@ -51,40 +57,3 @@ const getPrice = async()=>{
 }
 
 
-// Listen for any kind of message. There are different kinds of
-// messages.
-bot.on('message', async (msg) => {
-
-    bot.setMyCommands([
-        { command: "/run", description: "Начальное приветствие" },
-        { command: "/info", description: "Получить информацию о пользователе" },
-        { command: "/price", description: "Получить информацию о пользователе" },
-        { command: "/hi", description: "Получить информацию о пользователе" },
-        { command: "/privet", description: "Получить информацию о пользователе" },
-      ]);
-
-  const chatId = msg.chat.id; // присвоить другой чат id
-console.log("id chat", chatId)
-  let text = msg.text
-
-  if(text=="/run"){
-    bot.sendMessage(chatId, 'Я запустился')
-    return
-  }
-  if(text=='/price'){
-    
-    const price = await getPrice()
-    console.log('price', price)
-    bot.sendMessage(chatId, "Актуальная цена дизтоплива " + price)
-    return
-  }else{
-    bot.sendMessage(chatId, 'Я не знаю такой команды');
-    
-  }
-
-//   console.log(msg)
-
-
-  // send a message to the chat acknowledging receipt of their message
-  
-});
